@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,29 +18,72 @@ public class MainActivity extends AppCompatActivity {
     Button playAgainButton;
     Button button0,button1,button2,button3;
     TextView sumTextView, resultTextView, pointsTextView, timerTextView;
+    RelativeLayout gameRelativeLayout;
 
     ArrayList<Integer> answer = new ArrayList<Integer>();
     int score = 0, numberOfQuetions =0;
     int locationOfCorrectAnswer;
 
+    private void playAgain(View view) {
+
+        score = 0;
+        numberOfQuetions = 0;
+
+        timerTextView.setText("30s");
+        pointsTextView.setText("0/0");
+        resultTextView.setText("");
+        playAgainButton.setVisibility(view.INVISIBLE);
+
+        generateQuestion();
+
+        new CountDownTimer(30000, 1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                timerTextView.setText(String.valueOf(millisUntilFinished / 1000)+"s");
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                playAgainButton.setVisibility(View.VISIBLE);
+                timerTextView.setText("0s");
+                resultTextView.setText("Your score: "+ Integer.toString(score)+"/"+Integer.toString(numberOfQuetions));
+
+            }
+        }.start();
+    }
+
+
     public void generateQuestion(){
+
         Random rand = new Random();
         int a = rand.nextInt(21);
         int b = rand.nextInt(21);
 
-        sumTextView.setText(Integer.toString(a)+ "+" + Integer.toString(b));
+        sumTextView.setText(Integer.toString(a)+ " + " + Integer.toString(b));
 
         locationOfCorrectAnswer=rand.nextInt(4);
         answer.clear();
 
+        int inCorrectAnswer;
         for (int i = 0 ; i< 4; i++){
             if(i==locationOfCorrectAnswer){
+
                 answer.add(a+b);
+
             }else{
-                int inCorrectAnswer = rand.nextInt(41);
+
+                inCorrectAnswer = rand.nextInt(41);
+
                 while(inCorrectAnswer == a + b){
+
                     inCorrectAnswer = rand.nextInt(41);
+
                 }
+
                 answer.add(inCorrectAnswer);
             }
         }
@@ -48,37 +92,6 @@ public class MainActivity extends AppCompatActivity {
         button2.setText(Integer.toString(answer.get(2)));
         button3.setText(Integer.toString(answer.get(3)));
 
-    }
-
-    public void start(View view){
-        startButton.setVisibility(View.INVISIBLE);
-    }
-
-    private void playAgain(View view) {
-        Log.e("Play again clicked", "Clicked");
-        score = 0;
-        numberOfQuetions = 0;
-        timerTextView.setText("30s");
-        pointsTextView.setText("0/0");
-        resultTextView.setText("");
-        playAgainButton.setVisibility(view.INVISIBLE);
-
-        generateQuestion();
-
-        new CountDownTimer(3100, 1000){
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timerTextView.setText(String.valueOf(millisUntilFinished / 1000)+"s");
-            }
-
-            @Override
-            public void onFinish() {
-                playAgainButton.setVisibility(View.VISIBLE);
-                timerTextView.setText("0s");
-                resultTextView.setText("Your score"+ Integer.toString(score)+"/"+Integer.toString(numberOfQuetions));
-            }
-        }.start();
     }
 
     public void chooseAnswer(View view){
@@ -96,6 +109,14 @@ public class MainActivity extends AppCompatActivity {
         pointsTextView.setText(Integer.toString(score)+"/"+Integer.toString(numberOfQuetions));
         generateQuestion();
     }
+
+    public void start(View view){
+        startButton.setVisibility(View.INVISIBLE);
+        gameRelativeLayout.setVisibility(gameRelativeLayout.VISIBLE);
+
+        playAgain(findViewById(R.id.playAgainButton));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,9 +135,7 @@ public class MainActivity extends AppCompatActivity {
         startButton = (Button)findViewById(R.id.startButton);
         playAgainButton = (Button)findViewById(R.id.playAgainButton);
 
-        Log.e("Play again clicked", "initaiting");
-        playAgain(findViewById(R.id.playAgainButton));
-
+        gameRelativeLayout = (RelativeLayout)findViewById(R.id.gameRelativeLayout);
 
     }
 }
