@@ -1,18 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/startButton"
+        android:onClick="start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="189dp"
+        android:layout_marginEnd="114dp"
+        android:background="#77ec70"
+        android:padding="40dp"
+        android:text="Go!"
+        android:visibility="invisible"
+        android:textSize="50sp" />
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#e9d24e"
+            android:padding="5dp"
+            android:id="@+id/timerTextView"
+            android:text="30s"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:id="@+id/sumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="166dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:text="1 + 1"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="#e79548"
+            android:padding="5dp"
+            android:text="0/0"
+            android:id="@+id/pointsTextView"
+            android:textSize="30sp" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="39dp">
+
+            <Button
+                android:id="@+id/button0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:tag="0"
+                android:padding="20dp"
+                android:background="#2b78d7"
+                android:onClick="chooseAnswer"
+                android:text="10"
+                android:textSize="50sp" />
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#63ed39"
+                android:padding="20dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_columnWeight="0"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:tag="1"
+                android:onClick="chooseAnswer"
+                android:text="10"
+                android:textSize="50sp" />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:padding="20dp"
+                android:layout_gravity="fill"
+                android:tag="3"
+                android:background="#e47a1d"
+                android:onClick="chooseAnswer"
+                android:text="10"
+                android:textSize="50sp" />
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:padding="20dp"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="#e557ef"
+                android:layout_gravity="fill"
+                android:tag="0"
+                android:onClick="chooseAnswer"
+                android:text="10"
+                android:textSize="50sp" />
+
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/resultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="132dp"
+            android:layout_marginBottom="116dp"
+            android:text="Correct!"
+            android:textColor="#000000"
+            android:textSize="40sp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
