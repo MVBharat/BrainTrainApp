@@ -1,5 +1,6 @@
 package com.example.bharat.braintrain;
 
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button startButton;
     Button button0,button1,button2,button3;
-    TextView sumTextView, resultTextView, pointsTextView;
+    TextView sumTextView, resultTextView, pointsTextView, timerTextView;
 
     ArrayList<Integer> answer = new ArrayList<Integer>();
     int score = 0, numberOfQuetions =0;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         sumTextView = (TextView)findViewById(R.id.sumTextView);
         resultTextView = (TextView)findViewById(R.id.resultTextView);
         pointsTextView = (TextView)findViewById((R.id.pointsTextView));
+        timerTextView = (TextView)findViewById(R.id.timerTextView);
         startButton = (Button)findViewById(R.id.startButton);
 
          button0 = (Button)findViewById(R.id.button0);
@@ -83,5 +85,19 @@ public class MainActivity extends AppCompatActivity {
          button3 = (Button)findViewById(R.id.button3);
 
         generateQuestion();
+
+        new CountDownTimer(30100, 1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerTextView.setText(String.valueOf(millisUntilFinished / 1000)+"s");
+            }
+
+            @Override
+            public void onFinish() {
+                timerTextView.setText("0s");
+                resultTextView.setText("Your score"+ Integer.toString(score)+"/"+Integer.toString(numberOfQuetions));
+            }
+        }.start();
     }
 }
