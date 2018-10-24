@@ -68,6 +68,7 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/gridlayout"
             android:layout_marginTop="80dp"
             android:layout_marginBottom="39dp">
 
@@ -133,18 +134,35 @@
                 android:textSize="50sp" />
 
         </GridLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/gridlayout"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/resultTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="32dp"
+                android:textColor="#000000"
+                android:textSize="40sp" />
 
-        <TextView
-            android:id="@+id/resultTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="132dp"
-            android:layout_marginBottom="116dp"
-            android:textColor="#000000"
-            android:textSize="40sp"
-            />
+            <Button
+                android:id="@+id/playAgainButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:background="#0f9e0f"
+                android:textSize="20sp"
+                android:padding="10dp"
+                android:text="Play Again" />
+
+        </LinearLayout>
 
 
     </RelativeLayout>

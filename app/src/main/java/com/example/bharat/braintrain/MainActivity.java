@@ -14,6 +14,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     Button startButton;
+    Button playAgainButton;
     Button button0,button1,button2,button3;
     TextView sumTextView, resultTextView, pointsTextView, timerTextView;
 
@@ -53,6 +54,33 @@ public class MainActivity extends AppCompatActivity {
         startButton.setVisibility(View.INVISIBLE);
     }
 
+    private void playAgain(View view) {
+        Log.e("Play again clicked", "Clicked");
+        score = 0;
+        numberOfQuetions = 0;
+        timerTextView.setText("30s");
+        pointsTextView.setText("0/0");
+        resultTextView.setText("");
+        playAgainButton.setVisibility(view.INVISIBLE);
+
+        generateQuestion();
+
+        new CountDownTimer(3100, 1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerTextView.setText(String.valueOf(millisUntilFinished / 1000)+"s");
+            }
+
+            @Override
+            public void onFinish() {
+                playAgainButton.setVisibility(View.VISIBLE);
+                timerTextView.setText("0s");
+                resultTextView.setText("Your score"+ Integer.toString(score)+"/"+Integer.toString(numberOfQuetions));
+            }
+        }.start();
+    }
+
     public void chooseAnswer(View view){
         Log.e("Tag:::::", (String)view.getTag());
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
@@ -77,27 +105,18 @@ public class MainActivity extends AppCompatActivity {
         resultTextView = (TextView)findViewById(R.id.resultTextView);
         pointsTextView = (TextView)findViewById((R.id.pointsTextView));
         timerTextView = (TextView)findViewById(R.id.timerTextView);
+
+        button0 = (Button)findViewById(R.id.button0);
+        button1 = (Button)findViewById(R.id.button1);
+        button2 = (Button)findViewById(R.id.button2);
+        button3 = (Button)findViewById(R.id.button3);
+
         startButton = (Button)findViewById(R.id.startButton);
+        playAgainButton = (Button)findViewById(R.id.playAgainButton);
 
-         button0 = (Button)findViewById(R.id.button0);
-         button1 = (Button)findViewById(R.id.button1);
-         button2 = (Button)findViewById(R.id.button2);
-         button3 = (Button)findViewById(R.id.button3);
+        Log.e("Play again clicked", "initaiting");
+        playAgain(findViewById(R.id.playAgainButton));
 
-        generateQuestion();
 
-        new CountDownTimer(30100, 1000){
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timerTextView.setText(String.valueOf(millisUntilFinished / 1000)+"s");
-            }
-
-            @Override
-            public void onFinish() {
-                timerTextView.setText("0s");
-                resultTextView.setText("Your score"+ Integer.toString(score)+"/"+Integer.toString(numberOfQuetions));
-            }
-        }.start();
     }
 }
